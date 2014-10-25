@@ -1,3 +1,6 @@
+My-Grunt-Boilerplate
+====================
+
 Node installation:
 -------------------
 brew install node
