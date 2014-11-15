@@ -1,21 +1,21 @@
 {
-  "name": "my-grunt-boilerplate",
-  "version": "1.0.0",
-  "authors": [
-    "Majid <majid@averta.net>"
-  ],
-  "description": "My Grunt Boilerplate",
-  "main": "Gruntfile.js",
-  "moduleType": [],
-  "keywords": [],
-  "license": "MIT",
-  "homepage": "www.averta.net",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components"
-  ],
-  "dependencies": {
-    "jquery": "~2.1.1"
-  }
+    "name": "my-grunt-boilerplate",
+    "version": "1.0.0",
+    "authors": [
+        "Majid <majid@averta.net>"
+    ],
+    "description": "My Grunt Boilerplate",
+    "main": "Gruntfile.js",
+    "moduleType": [],
+    "keywords": [],
+    "license": "MIT",
+    "homepage": "www.averta.net",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "jquery": "~2.1.1"
+    }
 }
