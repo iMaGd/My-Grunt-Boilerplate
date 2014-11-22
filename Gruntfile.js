@@ -9,6 +9,18 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
+        // Meta definitions
+        meta: {
+            header: "/*\n" +
+                " *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> (<%= grunt.template.today('yyyy-mm-dd') %>)\n" +
+                " *  <%= pkg.homepage %>\n" +
+                " *\n" +
+                " *  <%= pkg.description %>\n" +
+                " *\n" +
+                " *  Copyright (c) 2010-<%= grunt.template.today('yyyy') %> <%= pkg.author.name %> <<%= pkg.author.url %>>\n" +
+                " *  License: <%= pkg.author.license %>\n" +
+                " */\n"
+        },
 
         // javascript linting with jshint
         jshint: {
