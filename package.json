@@ -1,24 +1,29 @@
 {
     "name": "my-grunt-boilerplate",
+    "title": "My Grunt Poilerplate",
     "version": "1.0.0",
-    "description": "My Grunt Boilerplate",
+    "description": "Description for My Grunt Boilerplate",
+    "homepage": "https://github.org/username/",
+    "license" : "",
+    "author": "authorName <info@domain.net> (www.domain.net)",
+    "private": true,
     "main": "Gruntfile.js",
     "devDependencies": {
-        "grunt": "~0.4.5",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-contrib-jshint": "~0.10.0",
-        "grunt-contrib-uglify": "~0.6.0",
-        "grunt-contrib-compass": "~1.0.1",
-        "grunt-contrib-copy": "~0.7.0",
-        "grunt-contrib-imagemin": "~0.9.1",
-        "grunt-contrib-htmlmin": "~0.3.0",
-        "grunt-contrib-connect": "~0.8.0",
-        "grunt-contrib-concat": "~0.5.0",
-        "load-grunt-tasks": "~1.0.0",
-        "time-grunt": "~1.0.0",
-        "grunt-concurrent": "~1.0.0",
-        "grunt-autoprefixer": "~1.0.1",
-        "grunt-contrib-requirejs": "~0.4.4"
+        "grunt": ">=0.4.5",
+        "grunt-contrib-watch": ">=0.6.1",
+        "grunt-contrib-jshint": ">=0.10.0",
+        "grunt-contrib-uglify": ">=0.6.0",
+        "grunt-contrib-compass": ">=1.0.1",
+        "grunt-contrib-copy": ">=0.7.0",
+        "grunt-contrib-imagemin": ">=0.9.1",
+        "grunt-contrib-htmlmin": ">=0.3.0",
+        "grunt-contrib-connect": ">=0.8.0",
+        "grunt-contrib-concat": ">=0.5.0",
+        "load-grunt-tasks": ">=1.0.0",
+        "time-grunt": ">=1.0.0",
+        "grunt-concurrent": ">=1.0.0",
+        "grunt-autoprefixer": ">=1.0.1",
+        "grunt-contrib-requirejs": ">=0.4.4"
     },
     "repository": {
         "type": "git",
@@ -27,9 +32,6 @@
     "keywords": [
         "grunt",
         "bower"
-    ],
-    "author": [
-        "Majid <majid@averta.net>"
     ],
     "bower": {
         "components": "bower_components/"
