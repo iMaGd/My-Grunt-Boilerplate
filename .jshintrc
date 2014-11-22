@@ -17,6 +17,7 @@
     "newcap": true,
     "supernew": true,
     "expr": "0",
+    "trailing": false,
     "globals": {
         "Backbone": true,
         "_": true,
