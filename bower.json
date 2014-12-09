@@ -5,17 +5,25 @@
         "Majid <majid@averta.net>"
     ],
     "description": "My Grunt Boilerplate",
-    "main": "Gruntfile.js",
+    "main": [
+        "dist/my-grunt-boilerplate.js",
+    ],
     "moduleType": [],
     "keywords": [],
     "license": "MIT",
     "homepage": "www.averta.net",
     "ignore": [
         "**/.*",
+        "_config.yml",
+        "composer.json",
         "node_modules",
-        "bower_components"
+        "bower_components",
+        "package.json",
+        "Gruntfile.js",
+        "contributors.txt",
+        "demo"
     ],
     "dependencies": {
-        "jquery": "~2.1.1"
+        "jquery": ">= 1.9.1"
     }
 }
