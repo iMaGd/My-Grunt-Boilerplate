@@ -19,7 +19,10 @@ module.exports = function(grunt) {
                 " *\n" +
                 " *  Copyright (c) 2010-<%= grunt.template.today('yyyy') %> <%= pkg.author.name %> <<%= pkg.author.url %>>\n" +
                 " *  License: <%= pkg.author.license %>\n" +
-                " */\n"
+                " */\n",
+                
+            buildPath: 'build/app/',
+            zipBuildPath: 'build/app.zip'
         },
 
         // javascript linting with jshint
@@ -194,12 +197,15 @@ module.exports = function(grunt) {
             // Increase package.json version one step
             bumpVersion: {
                 command: 'npm version patch'
+            },
+            zipBuild: {
+                command: 'zip -r <%= meta.zipBuildPath %> <%= meta.buildPath %>'
             }
         },
     
         clean: {
             build: [
-                'build'
+                '<%= meta.buildPath %>', '<%= meta.zipBuildPath %>', 
             ]
         },
         
@@ -220,7 +226,6 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'css/sass-output/base.css': 'css/sass/base.scss'
-
                 }
             }
         },
@@ -232,12 +237,12 @@ module.exports = function(grunt) {
                 browsers: ['last 2 versions', 'ie 9', 'ios 7', 'android 4'],
                 map: false
             },
-            files: {
+            build:{
                 expand: true,
-                flatten: false,
-                src: 'css/main.css',
-                dest: 'css/main.css'
-            },
+                cwd:  '<%= meta.buildPath %>',
+                src: [ '**/*.css' ],
+                dest: '<%= meta.buildPath %>'
+            }
         },
 
         // uglify to concat, minify, and make source maps
@@ -423,7 +428,8 @@ module.exports = function(grunt) {
     
     grunt.registerTask( 'release'   , ['shell:updateVersion']);
     grunt.registerTask( 'prebuild'  , ['clean:build'] );
-    grunt.registerTask( 'build'     , ['prebuild', 'copy:build', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
+    grunt.registerTask( 'pack'      , ['shell:zipBuild'] );
+    grunt.registerTask( 'build'     , ['prebuild', 'copy:build', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin', 'pack']);
 
     grunt.registerTask( 'dev'       , ['concurrent'] );
 
