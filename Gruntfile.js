@@ -403,8 +403,9 @@ module.exports = function(grunt) {
     // register task
     grunt.registerTask( 'default'   , ['watch']);
     
-    grunt.registerTask( 'release'   , ['shell:updateVersion']); 
-    grunt.registerTask( 'build'     , ['sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
+    grunt.registerTask( 'release'   , ['shell:updateVersion']);
+    grunt.registerTask( 'prebuild'  , ['clean:build'] );
+    grunt.registerTask( 'build'     , ['prebuild', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
 
     grunt.registerTask( 'dev'       , ['concurrent'] );
 
