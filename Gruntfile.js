@@ -173,9 +173,13 @@ module.exports = function(grunt) {
             bower_jquery:{
                 command: 'bower update jquery'
             },
-            // Update package.json version to git repo version (note: repo should be clean while using this target)
+            // Sync package.json version with git repo version
             updateVersion:{
                 command: 'npm version $(git describe --tags `git rev-list --tags --max-count=1`);'
+            },
+            // Increase package.json version one step
+            bumpVersion: {
+                command: 'npm version patch'
             }
         },
     
