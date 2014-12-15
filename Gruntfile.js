@@ -168,7 +168,12 @@ module.exports = function(grunt) {
                 ext: '.min.css'
             }
         },
-
+    
+        clean: {
+            build: [
+                'build'
+            ]
+        },
         
         sass: {
             front_dev: {                        
