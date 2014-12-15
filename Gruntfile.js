@@ -75,13 +75,13 @@ module.exports = function(grunt) {
                     {
                         expand: true,     // Enable dynamic expansion.
                         cwd: '',          // Src matches are relative to this path.
-                        src: [  '**', '!node_modules/**', '!bower_components/**','!build/**', '!Gruntfile.js', 
-                                '!package.json', '!bower.json', '!.gitignore', '!.jshintrc', '!.editorconfig',
-                                '!.team-workflow', '!contributors.txt'],      // Actual pattern(s) to match.
-                        dest: 'build/'   // Destination path prefix.
+                        src: [  '**', '!node_modules/**', '!bower_components/**','!build/**', 
+                                '!.*', '!Gruntfile.js', '!package.json', '!bower.json', '!contributors.txt'
+                        ],      // Actual pattern(s) to match.
+                        dest: 'build/masterslider/'   // Destination path prefix.
                     }
                 ]
-            },
+            }
             
             jquery: {
 
