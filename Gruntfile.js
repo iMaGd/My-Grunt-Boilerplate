@@ -397,20 +397,30 @@ module.exports = function(grunt) {
         // deploy via rsync
         deploy: {
             options: {
-                src: "./",
                 args: ["--verbose"],
-                exclude: ['.git*', 'node_modules', '.sass-cache', 'Gruntfile.js', 'package.json', '.DS_Store', 'README.md', 'config.rb', '.jshintrc'],
+                exclude: ['.git*', 'node_modules', '.sass-cache', 'Gruntfile.js', 'package.json', 
+                          '.*', 'README.md', 'config.rb', '.jshintrc', 'bower.json',
+                          'bower_components','build', 'contributors.txt', 'config.rb'
+                ],
                 recursive: true,
                 syncDestIgnoreExcl: true
             },
+            dist: {
+                options: {
+                    src: "./",
+                    dest: "<%= meta.buildPath %>"
+                }
+            },
             staging: {
                  options: {
+                    src: "<%= meta.buildPath %>",
                     dest: "~/path/to/theme",
                     host: "user@host.com"
                 }
             },
             production: {
                 options: {
+                    src: "<%= meta.buildPath %>",
                     dest: "~/path/to/theme",
                     host: "user@host.com"
                 }
@@ -420,7 +430,7 @@ module.exports = function(grunt) {
     });
 
     // rename tasks
-    // grunt.renameTask('rsync', 'deploy');
+    grunt.renameTask('rsync', 'deploy');
     
 
     // register task
@@ -429,7 +439,7 @@ module.exports = function(grunt) {
     grunt.registerTask( 'release'   , ['shell:updateVersion']);
     grunt.registerTask( 'prebuild'  , ['clean:build'] );
     grunt.registerTask( 'pack'      , ['shell:zipBuild'] );
-    grunt.registerTask( 'build'     , ['prebuild', 'copy:build', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin', 'pack']);
+    grunt.registerTask( 'build'     , ['prebuild', 'deploy:dist', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin', 'pack']);
 
     grunt.registerTask( 'dev'       , ['concurrent'] );
 
