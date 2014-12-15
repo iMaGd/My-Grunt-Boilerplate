@@ -401,9 +401,11 @@ module.exports = function(grunt) {
     
 
     // register task
-    grunt.registerTask( 'default', ['watch']);
-    grunt.registerTask( 'build', ['sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
+    grunt.registerTask( 'default'   , ['watch']);
+    
+    grunt.registerTask( 'release'   , ['shell:updateVersion']); 
+    grunt.registerTask( 'build'     , ['sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
 
-    grunt.registerTask( 'dev', ['concurrent'] );
+    grunt.registerTask( 'dev'       , ['concurrent'] );
 
 };
