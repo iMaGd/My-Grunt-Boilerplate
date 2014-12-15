@@ -168,6 +168,16 @@ module.exports = function(grunt) {
                 ext: '.min.css'
             }
         },
+        
+        shell:{
+            bower_jquery:{
+                command: 'bower update jquery'
+            },
+            // Update package.json version to git repo version (note: repo should be clean while using this target)
+            updateVersion:{
+                command: 'npm version $(git describe --tags `git rev-list --tags --max-count=1`);'
+            }
+        },
     
         clean: {
             build: [
