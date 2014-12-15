@@ -68,7 +68,21 @@ module.exports = function(grunt) {
 
         // Copy files from bower_component folder to right places
         copy: {
+            
+            build: {
 
+                files: [
+                    {
+                        expand: true,     // Enable dynamic expansion.
+                        cwd: '',          // Src matches are relative to this path.
+                        src: [  '**', '!node_modules/**', '!bower_components/**','!build/**', '!Gruntfile.js', 
+                                '!package.json', '!bower.json', '!.gitignore', '!.jshintrc', '!.editorconfig',
+                                '!.team-workflow', '!contributors.txt'],      // Actual pattern(s) to match.
+                        dest: 'build/'   // Destination path prefix.
+                    }
+                ]
+            },
+            
             jquery: {
 
                 files: [
@@ -409,7 +423,7 @@ module.exports = function(grunt) {
     
     grunt.registerTask( 'release'   , ['shell:updateVersion']);
     grunt.registerTask( 'prebuild'  , ['clean:build'] );
-    grunt.registerTask( 'build'     , ['prebuild', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
+    grunt.registerTask( 'build'     , ['prebuild', 'copy:build', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin']);
 
     grunt.registerTask( 'dev'       , ['concurrent'] );
 
