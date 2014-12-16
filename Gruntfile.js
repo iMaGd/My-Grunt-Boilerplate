@@ -430,12 +430,12 @@ module.exports = function(grunt) {
     
     grunt.registerTask( 'pack'          , ['shell:zipBuild'] );
 
-    grunt.registerTask( 'build'         , ['deploy:build', 'autoprefixer:build', 'pack']);
+    grunt.registerTask( 'build'         , ['deploy:build', 'autoprefixer:build', 'pack'] );
 
-    grunt.registerTask( 'staging'       , ['build', 'deploy:staging'   ] );
-    grunt.registerTask( 'production'    , ['build', 'deploy:production'] );
+    grunt.registerTask( 'staging'       , ['deploy:staging'   ] );
+    grunt.registerTask( 'production'    , ['deploy:production'] );
 
-    grunt.registerTask( 'release'       , ['staging', 'deploy:production', 'syncversion'] );
+    grunt.registerTask( 'release'       , ['build', 'staging', 'production', 'syncversion'] );
 
     grunt.registerTask( 'dev'           , ['concurrent'] );
 };
