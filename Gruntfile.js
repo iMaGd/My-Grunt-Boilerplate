@@ -435,7 +435,7 @@ module.exports = function(grunt) {
     grunt.registerTask( 'staging'       , ['build', 'deploy:staging'   ] );
     grunt.registerTask( 'production'    , ['build', 'deploy:production'] );
 
-    grunt.registerTask( 'release'       , 'staging', 'deploy:production', 'syncversion' );
+    grunt.registerTask( 'release'       , ['staging', 'deploy:production', 'syncversion'] );
 
     grunt.registerTask( 'dev'           , ['concurrent'] );
 };
