@@ -421,10 +421,11 @@ module.exports = function(grunt) {
     grunt.renameTask('rsync', 'deploy');
 
     // register task
-    grunt.registerTask( 'default'       , ['watch']);
+    grunt.registerTask( 'staging'       , ['deploy:staging'   ] );
+    grunt.registerTask( 'production'    , ['deploy:production'] );
 
     grunt.registerTask( 'syncversion'   , ['shell:updateVersion'] );
-    grunt.registerTask( 'bump'          , ['shell:bumpVersion'  ] ); 
+    grunt.registerTask( 'bump'          , ['shell:bumpVersion'  ] );
     
     grunt.registerTask( 'prebuild'      , ['clean:build'] );
     
@@ -432,10 +433,9 @@ module.exports = function(grunt) {
 
     grunt.registerTask( 'build'         , ['deploy:build', 'autoprefixer:build', 'pack'] );
 
-    grunt.registerTask( 'staging'       , ['deploy:staging'   ] );
-    grunt.registerTask( 'production'    , ['deploy:production'] );
-
-    grunt.registerTask( 'release'       , ['build', 'staging', 'production', 'syncversion'] );
-
+    grunt.registerTask( 'stage'         , ['build', 'staging'] );
+    grunt.registerTask( 'release'       , ['stage', 'production', 'syncversion'] );
+    
+    grunt.registerTask( 'default'       , ['watch'] );
     grunt.registerTask( 'dev'           , ['concurrent'] );
 };
