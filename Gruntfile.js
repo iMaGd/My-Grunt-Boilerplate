@@ -72,20 +72,6 @@ module.exports = function(grunt) {
         // Copy files from bower_component folder to right places
         copy: {
             
-            build: {
-
-                files: [
-                    {
-                        expand: true,     // Enable dynamic expansion.
-                        cwd: '',          // Src matches are relative to this path.
-                        src: [  '**', '!node_modules/**', '!bower_components/**','!build/**', 
-                                '!.*', '!Gruntfile.js', '!package.json', '!bower.json', '!contributors.txt'
-                        ],      // Actual pattern(s) to match.
-                        dest: 'build/masterslider/'   // Destination path prefix.
-                    }
-                ]
-            }
-            
             jquery: {
 
                 files: [
@@ -97,6 +83,7 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            
             plugins_averta: {
 
                 files: [
@@ -397,7 +384,7 @@ module.exports = function(grunt) {
         // deploy via rsync
         deploy: {
             options: {
-                args: ["--verbose"],
+                args: ["--verbose -zP"], // z:compress while transfering data, P:display progress
                 exclude: ['.git*', 'node_modules', '.sass-cache', 'Gruntfile.js', 'package.json', 
                           '.*', 'README.md', 'config.rb', '.jshintrc', 'bower.json',
                           'bower_components','build', 'contributors.txt', 'config.rb'
@@ -415,7 +402,8 @@ module.exports = function(grunt) {
                  options: {
                     src: "<%= meta.buildPath %>",
                     dest: "~/path/to/theme",
-                    host: "user@host.com"
+                    host: "user@host.com",
+                    delete: true // becareful, this option could cause data loss
                 }
             },
             production: {
@@ -431,16 +419,23 @@ module.exports = function(grunt) {
 
     // rename tasks
     grunt.renameTask('rsync', 'deploy');
-    
 
     // register task
-    grunt.registerTask( 'default'   , ['watch']);
+    grunt.registerTask( 'default'       , ['watch']);
+
+    grunt.registerTask( 'syncversion'   , ['shell:updateVersion'] );
+    grunt.registerTask( 'bump'          , ['shell:bumpVersion'  ] ); 
     
-    grunt.registerTask( 'release'   , ['shell:updateVersion']);
-    grunt.registerTask( 'prebuild'  , ['clean:build'] );
-    grunt.registerTask( 'pack'      , ['shell:zipBuild'] );
-    grunt.registerTask( 'build'     , ['prebuild', 'deploy:dist', 'sass', 'autoprefixer', 'cssmin', 'jshint', 'uglify', 'imagemin', 'pack']);
+    grunt.registerTask( 'prebuild'      , ['clean:build'] );
+    
+    grunt.registerTask( 'pack'          , ['shell:zipBuild'] );
 
-    grunt.registerTask( 'dev'       , ['concurrent'] );
+    grunt.registerTask( 'build'         , ['deploy:build', 'autoprefixer:build', 'pack']);
 
+    grunt.registerTask( 'staging'       , ['build', 'deploy:staging'   ] );
+    grunt.registerTask( 'production'    , ['build', 'deploy:production'] );
+
+    grunt.registerTask( 'release'       , 'build', 'deploy:staging', 'deploy:production', 'syncversion' );
+
+    grunt.registerTask( 'dev'           , ['concurrent'] );
 };
