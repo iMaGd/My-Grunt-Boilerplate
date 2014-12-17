@@ -185,8 +185,9 @@ module.exports = function(grunt) {
             bumpVersion: {
                 command: 'npm version patch'
             },
+            // pack build app and exclude dotfiles
             zipBuild: {
-                command: 'zip -r <%= meta.zipBuildPath %> <%= meta.buildPath %>'
+                command: 'zip -FSr -9 <%= meta.zipBuildPath %> <%= meta.buildPath %> -x */\.*'
             }
         },
     
