@@ -22,7 +22,9 @@ module.exports = function(grunt) {
                 " */\n",
                 
             buildPath: 'build/app/',
-            zipBuildPath: 'build/app.zip'
+            zipBuildPath: 'build/app.zip',
+            dropboxBaseDIR: '/Volumes/Vol1/Dropbox/',
+            dropboxSubDir: '<%= meta.dropboxBaseDIR %>some/path'
         },
 
         // javascript linting with jshint
@@ -125,6 +127,18 @@ module.exports = function(grunt) {
                         }
                     }
                 ]
+            },
+
+            dropbox: {
+
+                files: [
+                    {
+                        expand: true,     // Enable dynamic expansion.
+                        cwd: "",          // Src matches are relative to this path.
+                        src: [ '<%= meta.zipBuildPath %>' ],      // Actual pattern(s) to match.
+                        dest: '<%= meta.dropboxSubDir %>'   // Destination path prefix.
+                    }
+                ]
             }
             
         },
@@ -187,7 +201,7 @@ module.exports = function(grunt) {
             },
             // pack build app and exclude dotfiles
             zipBuild: {
-                command: 'zip -FSr -9 <%= meta.zipBuildPath %> <%= meta.buildPath %> -x */\.*'
+                command: 'zip -FSr -9 <%= meta.zipBuildPath %> <%= meta.buildPath %> -x -x /excludePath/* */\.*'
             }
         },
     
@@ -402,7 +416,7 @@ module.exports = function(grunt) {
             staging: {
                  options: {
                     src: "<%= meta.buildPath %>",
-                    dest: "~/path/to/theme",
+                    dest: "~/path/to/app/dir",
                     host: "user@host.com",
                     delete: true // becareful, this option could cause data loss
                 }
@@ -410,7 +424,7 @@ module.exports = function(grunt) {
             production: {
                 options: {
                     src: "<%= meta.buildPath %>",
-                    dest: "~/path/to/theme",
+                    dest: "~/path/to/app/dir",
                     host: "user@host.com"
                 }
             }
